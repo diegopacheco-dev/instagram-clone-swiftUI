@@ -10,9 +10,11 @@ import SwiftUI
 struct StoryItemView: View {
     var body: some View {
         VStack {
-            Image("dog").cornerRadius(.infinity)
-            Text("Your story")
-        }.padding()
+            Image("dog")
+                .frame(width: 60, height: 60, alignment: .center)
+                .cornerRadius(.infinity)
+            Text("Your story").font(.caption2).lineSpacing(22)
+        }
     }
 }
 

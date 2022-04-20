@@ -8,15 +8,16 @@
 import SwiftUI
 
 struct HomeView: View {
+    var homeManager = HomeManager()
     var body: some View {
         VStack {
             HeaderView()
             ScrollView {
                 StoriesView()
-                PostView()
-                PostView()
-                PostView()
-                PostView()
+                Divider()
+                ForEach(homeManager.posts, id: \.self) { post in
+                    PostView(data: post)
+                }
             }
         }
         

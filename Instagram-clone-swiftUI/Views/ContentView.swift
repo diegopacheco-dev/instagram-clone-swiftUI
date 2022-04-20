@@ -12,20 +12,28 @@ struct ContentView: View {
         TabView {
             HomeView()
                 .tabItem {
-                    Image(systemName: "1.square.fill")
-                    Text("First")
+                    Image(systemName: "house.fill").foregroundColor(.red)
                 }
             Text("Another Tab")
                 .tabItem {
-                    Image(systemName: "2.square.fill")
-                    Text("Second")
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(.black)
                 }
             Text("The Last Tab")
                 .tabItem {
-                    Image(systemName: "3.square.fill")
-                    Text("Third")
+                    Image(systemName: "play.rectangle")
+                        .foregroundColor(.black)
                 }
-        }
+            Text("The Last Tab")
+                .tabItem {
+                    Image(systemName: "bag.fill")
+                        .foregroundColor(.black)
+                }
+            Text("The Last Tab")
+                .tabItem {
+                    Image(systemName: "person.circle")
+                }
+        }.accentColor(.black)
 
     }
 }

@@ -9,12 +9,15 @@ import SwiftUI
 
 struct StoriesView: View {
     var body: some View {
-        ScrollView(.horizontal) {
-            HStack {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 16) {
                 ForEach(1..<9) {_ in
                     StoryItemView()
                 }
             }
+            .padding(.top, 10)
+            .padding(.bottom, 5)
+            .padding(.horizontal, 16)
         }
     }
 }
