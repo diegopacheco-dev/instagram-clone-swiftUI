@@ -8,21 +8,24 @@
 import SwiftUI
 
 struct PostView: View {
-    var data: Post
+    var name: String
+    var imageURL: String
+    var likes: Int
+    var description: String
+    
     var body: some View {
         VStack (spacing: 0) {
-            HeaderPost(username: data.username)
-            ImagePost(imageName: data.photoName)
+            HeaderPost(username: name)
+            ImagePost(imageURL: imageURL)
             ActionsPost()
-            CommentBox(likes: data.likes)
+            CommentBox(likes: likes, description: description, imageURL: imageURL)
         }.padding(.bottom, 10)
-        
     }
 }
-/*
+
 struct PostView_Previews: PreviewProvider {
     static var previews: some View {
-        PostView().previewLayout(.sizeThatFits)
+        PostView(name: "username", imageURL: "", likes: 20, description: "").previewLayout(.sizeThatFits)
     }
 }
-*/
+

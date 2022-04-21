@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct StoriesView: View {
+    var stories = [Post]()
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 16) {
-                ForEach(1..<9) {_ in
-                    StoryItemView()
+            HStack(spacing: 21) {
+                ForEach(stories) {story in
+                    StoryItemView(name: story.name, imageURL: story.image)
                 }
             }
             .padding(.top, 10)
             .padding(.bottom, 5)
-            .padding(.horizontal, 16)
+            .padding(.trailing, 16)
+            .padding(.leading, 25)
         }
     }
 }

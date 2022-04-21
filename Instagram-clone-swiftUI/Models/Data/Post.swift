@@ -7,11 +7,15 @@
 
 import Foundation
 
-struct Post {
-    var username: String
-    var photoName: String
-    var likes: Int
-    var description: String
+struct PostsData: Decodable {
+    var results: [Post]
 }
 
-extension Post: Hashable {}
+struct Post: Decodable, Identifiable {
+    var id: Int
+    var name: String
+    var image: String
+    var status: String
+    var species: String
+    var gender: String
+}

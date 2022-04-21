@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct CommentBox: View {
-    var likes: Int = 100
+    var likes: Int
+    var description: String
+    var imageURL: String
     @State private var commentText: String = ""
     
     var body: some View {
@@ -17,18 +19,33 @@ struct CommentBox: View {
             Button(action: {}) {
                 Text("\(likes) Likes").multilineTextAlignment(.leading)
             }.frame(maxWidth: .infinity, alignment: .leading).foregroundColor(.black)
-                .padding(.horizontal, 16)
-            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt... more ")
-                .padding(.horizontal, 16)
+            Text(description)
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.vertical, 5)
             HStack{
-                Image("photoComment")
-                    .frame(width: 24, height: 24, alignment: .center)
-                    .cornerRadius(.infinity)
+                AsyncImage(url: URL(string: imageURL)) { phase in
+                    switch phase {
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .frame(width: 24, height: 24, alignment: .center)
+                            .cornerRadius(.infinity)
+                    case .empty, .failure :
+                        Image("no-image")
+                            .resizable()
+                            .frame(width: 24, height: 24, alignment: .center)
+                            .cornerRadius(.infinity)
+                    @unknown default:
+                        Image("no-image")
+                            .resizable()
+                            .frame(width: 24, height: 24, alignment: .center)
+                            .cornerRadius(.infinity)
+                    }
+                }
                 TextField("Add comment", text: $commentText)
-            }.padding(.horizontal, 16)
+            }
             .padding(.vertical, 5)
-        }
+        }.padding(.horizontal, 16)
         
     }
 }
@@ -36,7 +53,7 @@ struct CommentBox: View {
 struct CommentBox_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            CommentBox().previewLayout(.sizeThatFits)
+            CommentBox(likes: 20, description: "", imageURL: "").previewLayout(.sizeThatFits)
         }
     }
 }

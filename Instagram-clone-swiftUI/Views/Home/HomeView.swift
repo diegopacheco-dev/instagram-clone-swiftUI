@@ -8,24 +8,27 @@
 import SwiftUI
 
 struct HomeView: View {
-    var homeManager = HomeManager()
+    @ObservedObject var networkManager = NetworkManager()
     var body: some View {
         VStack {
             HeaderView()
             ScrollView {
-                StoriesView()
+                StoriesView(stories: networkManager.posts)
                 Divider()
-                ForEach(homeManager.posts, id: \.self) { post in
-                    PostView(data: post)
+                ForEach(networkManager.posts) { post in
+                    
+                    let description = "\(post.gender)\n\(post.species)\n\(post.status)"
+                    PostView(name: post.name, imageURL: post.image, likes: Int.random(in: 1...100), description: description)
                 }
             }
+        }.onAppear {
+            networkManager.fetchData()
         }
-        
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView(networkManager: NetworkManager())
     }
 }

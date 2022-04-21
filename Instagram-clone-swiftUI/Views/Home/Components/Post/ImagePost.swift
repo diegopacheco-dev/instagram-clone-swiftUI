@@ -8,14 +8,32 @@
 import SwiftUI
 
 struct ImagePost: View {
-    var imageName: String = "photo1"
+    var imageURL: String
     var body: some View {
-        Image(imageName).resizable().scaledToFill().frame(height: 400.0).clipped()
+        AsyncImage(url: URL(string: imageURL)) { phase in
+            switch phase {
+            case .success(let image):
+                image.resizable()
+                    .scaledToFill()
+                    .frame(height: 400.0)
+                    .clipped()
+            case .empty, .failure :
+                Image("no-image")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(height: 400.0)
+            @unknown default:
+                Image("no-image")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(height: 400.0)
+            }
+        }
     }
 }
 
 struct ImagePost_Previews: PreviewProvider {
     static var previews: some View {
-        ImagePost().previewLayout(.sizeThatFits)
+        ImagePost(imageURL: "").previewLayout(.sizeThatFits)
     }
 }
