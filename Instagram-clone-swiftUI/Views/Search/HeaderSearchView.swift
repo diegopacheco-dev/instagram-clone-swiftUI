@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HeaderSearchView: View {
-    @ObservedObject private var networkManager = NetworkManager()
+    //@ObservedObject private var networkManager = NetworkManager()
     @State var searchText: String 
     var body: some View {
         HStack {
@@ -17,8 +17,7 @@ struct HeaderSearchView: View {
                 Text("Search")
             }
             Button(action: {
-                networkManager.fetchSearchData(search: searchText
-                )
+                //networkManager.fetchSearchData(search: searchText)
             }) {
                 Text("Buscar")
             }

@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ExploreView: View {
     
-    @ObservedObject private var networkManager = NetworkManager()
+    //@ObservedObject private var networkManager = NetworkManager()
+    @ObservedObject private var searchScreenModel = SearchScreenModel()
     var post: InstagramPost
     var description: String {
         var text = ""
@@ -30,7 +31,7 @@ struct ExploreView: View {
         ScrollView {
             PostView(name: post.name, imageURL: post.image, likes: Int.random(in: 1...100), description: description)
             
-            ForEach(networkManager.searchPhotos) { post in
+            ForEach(searchScreenModel.result) { post in
                 
                 PostView(name: post.photographer, imageURL: post.src.medium, likes: Int.random(in: 1...100), description: post.alt)
                 

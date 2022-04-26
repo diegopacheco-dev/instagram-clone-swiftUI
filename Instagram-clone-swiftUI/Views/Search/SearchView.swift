@@ -9,8 +9,7 @@ import SwiftUI
 
 struct SearchView: View {
     
-    @ObservedObject private var networkManager = NetworkManager()
-    @State var searchText: String = ""
+    @ObservedObject private var searchScreenModel = SearchScreenModel()
     private var gridItemLayout = [GridItem(spacing: 1), GridItem(spacing: 1), GridItem(spacing: 1)]
 
     var body: some View {
@@ -18,10 +17,10 @@ struct SearchView: View {
             //HeaderSearchView(searchText: "")
             HStack {
                 Image("search-icon")
-                TextField(text: $searchText) {
+                TextField(text: $searchScreenModel.searchWord) {
                     Text("Search")
-                }.onChange(of: searchText) { newValue in
-                    networkManager.fetchSearchData(search: searchText)
+                }.onChange(of: searchScreenModel.searchWord) { newValue in
+                    searchScreenModel.fetchSearchData()
                 }
             }
             .padding(7)
@@ -31,7 +30,7 @@ struct SearchView: View {
                 .padding(.horizontal, 10)
             Spacer()
             LazyVGrid(columns: gridItemLayout, spacing: 1) {
-                ForEach(networkManager.searchPhotos) { photo in
+                ForEach(searchScreenModel.result) { photo in
                     
                     NavigationLink(destination: ExploreView(post: InstagramPost(id: photo.id, name: photo.photographer, image: photo.src.medium, status: "", species: "", gender: photo.alt)), label: {
                     AsyncImage(url: URL(string: photo.src.medium)) { phase in
@@ -58,7 +57,7 @@ struct SearchView: View {
             }
         }
         .onAppear{
-            networkManager.fetchSearchData(search: "city")
+            searchScreenModel.fetchSearchData()
         }
         
     }
