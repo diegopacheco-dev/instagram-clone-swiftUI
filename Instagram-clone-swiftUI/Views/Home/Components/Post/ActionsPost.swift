@@ -8,22 +8,19 @@
 import SwiftUI
 
 struct ActionsPost: View {
+    
+    let buttonsIcons = ["heart", "message", "paperplane", "bookmark"]
+    
     var body: some View {
         HStack (spacing: 14) {
-            Button(action: {}) {
-                Image(systemName: "heart").resizable().frame(width: 24, height: 24)
-            }.foregroundColor(.black)
-            Button(action: {}) {
-                Image(systemName: "message").resizable().frame(width: 24, height: 24)
-            }.foregroundColor(.black)
-            Button(action: {}) {
-                Image(systemName: "paperplane").resizable().frame(width: 24, height: 24)
-            }.foregroundColor(.black)
-            Spacer()
-            Button(action: {}) {
-                Image(systemName: "bookmark")
-                    .resizable().frame(width: 24, height: 24)
-            }.foregroundColor(.black)
+            ForEach(buttonsIcons, id: \.self) {buttonIcon in
+                Button(action: {}) {
+                    Image(systemName: buttonIcon).resizable().frame(width: 24, height: 24)
+                }.foregroundColor(.black)
+                if buttonIcon == "paperplane" {
+                    Spacer()
+                }
+            }
         }.padding(.horizontal, 16)
             .padding(.vertical, 9)
     }

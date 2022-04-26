@@ -14,8 +14,8 @@ struct ImagePost: View {
             switch phase {
             case .success(let image):
                 image.resizable()
-                    .scaledToFill()
                     .frame(height: 400.0)
+                    .scaledToFill()
                     .clipped()
             case .empty, .failure :
                 Image("no-image")

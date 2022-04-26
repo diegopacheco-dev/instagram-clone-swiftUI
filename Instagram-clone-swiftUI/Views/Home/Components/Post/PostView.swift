@@ -17,7 +17,9 @@ struct PostView: View {
         VStack (spacing: 0) {
             HeaderPost(username: name)
             ImagePost(imageURL: imageURL)
+                .padding(.vertical, 10)
             ActionsPost()
+                .padding(.top, 10)
             CommentBox(likes: likes, description: description, imageURL: imageURL)
         }.padding(.bottom, 10)
     }

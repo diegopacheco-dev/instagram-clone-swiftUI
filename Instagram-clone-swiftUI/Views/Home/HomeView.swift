@@ -13,7 +13,7 @@ struct HomeView: View {
         VStack {
             HeaderView()
             ScrollView {
-                StoriesView(stories: networkManager.posts)
+                StoriesContainerView(stories: networkManager.posts)
                 Divider()
                 ForEach(networkManager.posts) { post in
                     
@@ -22,7 +22,7 @@ struct HomeView: View {
                 }
             }
         }.onAppear {
-            networkManager.fetchData()
+            networkManager.fetchDataPosts()
         }
     }
 }

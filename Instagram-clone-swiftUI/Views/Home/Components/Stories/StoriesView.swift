@@ -2,24 +2,24 @@
 //  StoriesView.swift
 //  Instagram-clone-swiftUI
 //
-//  Created by Diego on 18/04/22.
+//  Created by Diego on 22/04/22.
 //
 
 import SwiftUI
 
 struct StoriesView: View {
-    var stories = [Post]()
+    var progress: CGFloat = 0
+    
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 21) {
-                ForEach(stories) {story in
-                    StoryItemView(name: story.name, imageURL: story.image)
-                }
+        GeometryReader {geometry in
+            ZStack(alignment: .leading) {
+                Rectangle().foregroundColor(Color.white.opacity(0.3))
+                    .cornerRadius(5)
+                Rectangle()
+                    .frame(width: geometry.size.width * self.progress, height: nil, alignment: .leading)
+                    .foregroundColor(Color.white.opacity(0.9))
+                    .cornerRadius(5)
             }
-            .padding(.top, 10)
-            .padding(.bottom, 5)
-            .padding(.trailing, 16)
-            .padding(.leading, 25)
         }
     }
 }

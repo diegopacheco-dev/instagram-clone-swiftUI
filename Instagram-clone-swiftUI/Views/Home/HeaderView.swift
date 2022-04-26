@@ -12,14 +12,13 @@ struct HeaderView: View {
         HStack {
             Image("logo")
             Spacer()
-            Button(action: {}) {
-                Image(systemName: "plus.app").foregroundColor(.black)
-            }
-            Button(action: {}) {
-                Image(systemName: "heart").foregroundColor(.black)
-            }
-            Button(action: {}) {
-                Image(systemName: "message").foregroundColor(.black)
+            ForEach(["plus.app", "heart", "message"], id: \.self) {imageName in
+                NavigationLink {
+                    Text("Destination")
+                } label: {
+                    Image(systemName: imageName)
+                }
+
             }
         }.padding()
         

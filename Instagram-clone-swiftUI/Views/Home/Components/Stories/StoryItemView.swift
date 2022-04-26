@@ -11,9 +11,6 @@ struct StoryItemView: View {
     var name: String
     var imageURL: String
     
-    static let color0 = Color(red: 222/255, green: 0/255, blue: 70/255);
-    static let color1 = Color(red: 247/255, green: 163/255, blue: 75/255);
-    
     var body: some View {
         VStack {
             AsyncImage(url: URL(string: imageURL)) { phase in
@@ -29,7 +26,7 @@ struct StoryItemView: View {
                                 .stroke(lineWidth: 3)
                                 .fill(
                                     LinearGradient(
-                                        gradient: Gradient(colors: [StoryItemView.color0, StoryItemView.color1]), startPoint: .top, endPoint: .bottom)
+                                        gradient: Gradient(colors: [Color("redCustom"), Color("orangeCustom")]), startPoint: .top, endPoint: .bottom)
                                 ).padding(-5)
                         )
                 case .empty, .failure :

@@ -8,33 +8,79 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var selected = 0
+    let gradient = LinearGradient(colors: [.orange, .green],
+                                  startPoint: .topLeading,
+                                  endPoint: .bottomTrailing)
     var body: some View {
-        TabView {
-            HomeView()
-                .tabItem {
-                    Image(systemName: "house.fill").foregroundColor(.red)
+        
+        TabView(selection: $selected)  {
+            NavigationView {
+                HomeView()
+                    .navigationBarHidden(true)
+                
+            }
+            .tabItem {
+                if selected == 0 {
+                    Image("home-icon-fill")
+                } else {
+                    Image("home-icon")
                 }
-            Text("Another Tab")
-                .tabItem {
-                    Image(systemName: "magnifyingglass")
-                        .foregroundColor(.black)
+            }.tag(0)
+            NavigationView {
+                SearchView()
+                    .navigationTitle("")
+                    .navigationBarHidden(true)
+                
+            }
+            .tabItem {
+                if selected == 1 {
+                    Image("search-icon-fill")
+                } else {
+                    Image("search-icon")
                 }
-            Text("The Last Tab")
-                .tabItem {
-                    Image(systemName: "play.rectangle")
-                        .foregroundColor(.black)
+            }
+            .tag(1)
+            NavigationView {
+                Text("The Last Tab")
+                
+            }.tabItem {
+                if selected == 2 {
+                    Image("rels-icon-fill")
+                } else {
+                    Image("rels-icon")
                 }
-            Text("The Last Tab")
-                .tabItem {
-                    Image(systemName: "bag.fill")
-                        .foregroundColor(.black)
+            }
+            .tag(2)
+            NavigationView {
+                Text("Another Tab")
+                
+            }
+            .tabItem {
+                if selected == 3 {
+                    Image("bag-icon-fill")
+                } else {
+                    Image("bag-icon")
                 }
-            Text("The Last Tab")
-                .tabItem {
-                    Image(systemName: "person.circle")
+            }
+            .tag(3)
+            NavigationView {
+                ProfileView()
+                
+            }.tabItem {
+                if selected == 4 {
+                    Image("user-icon-fill")
+                } else {
+                    Image("user-icon")
                 }
-        }.accentColor(.black)
-
+            }
+            .tag(4)
+            
+        }.foregroundColor(.black)
+            .onAppear() {
+                UITabBar.appearance().barTintColor = .white
+            }
     }
 }
 
